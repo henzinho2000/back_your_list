@@ -11,11 +11,14 @@ clients:
         verdadeiro = Claro;
         falso = Escuro.
 
+    created_at(TIMESTAMP)
+    
     language(INT)
         1 = Português;
         2 = Inglês;
         3 = Francês;
         4 = Espanhol.
+
 
 list:
     id(SERIAL PRIMARY KEY),

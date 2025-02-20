@@ -1,5 +1,5 @@
 const express = require("express");
-const pool = require("../db.js");
+const pool = require("../db_connection/db.js");
 const { celebrate, Joi } = require("celebrate");
 const bcrypt = require("bcryptjs");
 
@@ -7,7 +7,7 @@ const route = express.Router();
 
 route.get("/", async (req, res, next)=>{
 	try{
-		const results = await pool.query('SELECT * FROM clients');
+		const results = await pool.query('SELECT name, email, thema, language FROM clients');
 		res.status(200).json(results.rows);
 	}catch(e){
 		next(err);
@@ -21,7 +21,7 @@ route.get(
 	}),
 	async (req, res, next)=>{
 		const {id} = req.params;
-		const result = await pool.query("SELECT id, name, email, thema, language FROM clients WHERE id = $1", [id]);
+		const result = await pool.query("SELECT name, email, thema, language FROM clients WHERE id = $1", [id]);
 		if(result.rows.length === 0){
 			return res.status(404).json({error: `Cliente where id:${id} not found.`});
 		}
@@ -50,7 +50,7 @@ route.post(
 			await client.query("BEGIN");
 
 			const result = await client.query(
-				"INSERT INTO clients(name, password, email, thema, language) VALUES($1, $2, $3, $4, $5) RETURNING id, name, email, thema, language, create_at", 
+				"INSERT INTO clients(name, password, email, thema, language) VALUES($1, $2, $3, $4, $5) RETURNING name, email, thema, language, created_at", 
 				[name, hashedPassword, email, thema, language]
 			);
 			await client.query("COMMIT");

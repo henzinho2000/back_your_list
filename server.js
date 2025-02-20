@@ -3,7 +3,8 @@ const { errors } = require("celebrate");
 const helmet = require("helmet");
 const cors = require("cors");
 const express = require("express");
-const apiRoute = require('./apiRoute/clients.js');
+const apiRoute = require('./src/api_route/clients.js');
+
 const app = express();
 
 //Segurança

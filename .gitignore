@@ -3,3 +3,9 @@
 
 #.env
 /.env
+
+#arquivos de teste
+*/tests/
+
+#db documentation
+**/db.txt
