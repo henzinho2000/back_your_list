@@ -5,7 +5,7 @@
 /.env
 
 #arquivos de teste
-*/tests/
+/tests
 
-#db documentation
-**/db.txt
+#documentation
+/documentation/private
